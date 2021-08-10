@@ -37,9 +37,8 @@ function Product({ id, title, price, description, category, image }) {
           <p className="text-xs text-gray-500">FREE Next-day Delivery</p>
         </div>
       )}
-      <div className="absolute bottom-2">
-        <button className="mt-auto button">Add to Basket</button>
-      </div>
+
+      <button className="mt-auto button">Add to Basket</button>
     </div>
   );
 }
