@@ -13,7 +13,7 @@ export default function Home({ products }) {
       {/* Header */}
       <Header />
 
-      <main className="max-w-screen-2xl mx-auto">
+      <main className="max-w-screen-2xl mx-auto overflow-y-auto">
         {/* Banner */}
         <Banner />
         {/* Product Feed */}
@@ -24,8 +24,9 @@ export default function Home({ products }) {
 }
 
 export async function getServerSideProps(context) {
-  const products = await fetch("https://fakestoreapi.com/products").then(
-    (res) => res.json()
+  const BASE_URL = process.env.PRODUCTS_BASE_URL;
+  const products = await fetch(`${BASE_URL}/products`).then((res) =>
+    res.json()
   );
 
   return {
