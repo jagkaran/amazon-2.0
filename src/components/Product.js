@@ -4,9 +4,11 @@ import { useState } from "react";
 import Currency from "react-currency-formatter";
 import { useDispatch } from "react-redux";
 import { addToBasket } from "../slices/basketSlice";
+import { v4 as uuidv4 } from "uuid";
 
 const MAX_RATING = 5;
 const MIN_RATING = 1;
+// const i = uuidv4();
 function Product({ id, title, price, description, category, image }) {
   const dispatch = useDispatch();
   // short term memory per component --> state
@@ -41,7 +43,7 @@ function Product({ id, title, price, description, category, image }) {
         {Array(rating)
           .fill()
           .map((_, i) => (
-            <StarIcon className="h-4 text-yellow-500" />
+            <StarIcon key={uuidv4()} className="h-4 text-yellow-500" />
           ))}
       </div>
 
