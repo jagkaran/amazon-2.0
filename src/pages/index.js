@@ -1,3 +1,4 @@
+import axios from "axios";
 import Head from "next/head";
 import Banner from "../components/Banner";
 import Header from "../components/Header";
@@ -25,9 +26,7 @@ export default function Home({ products }) {
 
 export async function getServerSideProps(context) {
   const BASE_URL = process.env.PRODUCTS_BASE_URL;
-  const products = await fetch(`${BASE_URL}/products`).then((res) =>
-    res.json()
-  );
+  const { data: products } = await axios.get(`${BASE_URL}/products`);
 
   return {
     props: {

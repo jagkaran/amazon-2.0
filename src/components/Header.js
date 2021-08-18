@@ -14,6 +14,17 @@ function Header() {
   const [session] = useSession();
   const router = useRouter();
   const items = useSelector(selectItems);
+  const capitalize = (str) => {
+    const arrOfWords = str.split(" ");
+    const arrOfWordsCased = [];
+
+    for (let i = 0; i < arrOfWords.length; i++) {
+      const word = arrOfWords[i];
+      arrOfWordsCased.push(word[0].toUpperCase() + word.slice(1).toLowerCase());
+    }
+
+    return arrOfWordsCased.join(" ");
+  };
   return (
     <header>
       {/* Top nav */}
@@ -40,7 +51,9 @@ function Header() {
         {/* Right side */}
         <div className="text-white flex items-center text-xs space-x-6 mx-6 whitespace-nowrap">
           <div onClick={!session ? signIn : signOut} className="link">
-            <p>{session ? `Hello, ${session.user.name}` : `Sign In`}</p>
+            <p>
+              {session ? `Hello, ${capitalize(session.user.name)}` : `Sign In`}
+            </p>
             <p className="font-extrabold md:text-sm">Accounts & List</p>
           </div>
 
