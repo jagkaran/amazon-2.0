@@ -1,4 +1,5 @@
 import axios from "axios";
+import { getSession } from "next-auth/client";
 import Head from "next/head";
 import Banner from "../components/Banner";
 import Header from "../components/Header";
@@ -25,12 +26,14 @@ export default function Home({ products }) {
 }
 
 export async function getServerSideProps(context) {
+  const session = await getSession(context);
   const BASE_URL = process.env.PRODUCTS_BASE_URL;
   const { data: products } = await axios.get(`${BASE_URL}/products`);
 
   return {
     props: {
       products,
+      session,
     },
   };
 }
