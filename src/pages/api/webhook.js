@@ -46,8 +46,10 @@ export default async (req, res) => {
     try {
       event = stripe.webhooks.constructEvent(payload, sig, endpointSecret);
     } catch (error) {
-      console.log("ERROR", error.message);
-      return res.status(400).send(`Webhook error:${error.message}`);
+      console.log("ERROR while constructing event", error.message);
+      return res
+        .status(400)
+        .send(`Webhook error while constructing event:${error.message}`);
     }
 
     // Handle checkout.session.completed event
@@ -57,7 +59,12 @@ export default async (req, res) => {
       //   fulfill the order...
       return fullfillOrder(session)
         .then(() => res.status(200))
-        .catch((err) => res.status(400).send(`Webhook Error: ${err.message}`));
+        .catch((err) => {
+          console.log("ERROR while fulfilling order", err.message);
+          res
+            .status(400)
+            .send(`Webhook Error while fulfilling order: ${err.message}`);
+        });
     }
   }
 };
