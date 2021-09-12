@@ -13,7 +13,7 @@ const app = !admin.apps.length
 //   Establish connection to stripe
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
-const endpointSecret = process.env.STRIPE_SIGNING_SECRET;
+const endpointSecret = process.env.STRIPE_WEBHOOK_SECRET;
 
 const fullfillOrder = async (session) => {
   //console.log("Fulfilling order", session);
